@@ -6,14 +6,13 @@ const router = new VueRouter({
   routes: [
     {
       path: "/",
+      name: "home",
       component: () => import("@/components/HelloWorld.vue"),
-      // children: [
-      //   {
-      //     path: '',
-      //     name: 'email_signin',
-      //     component: () => import( '@/components/signin/Email.vue'),
-      //   },
-      // ]
+    },
+    {
+      path: "/cart",
+      name: "shoppingcart",
+      component: () => import("@/components/ShoppingCart.vue"),
     },
   ],
 });

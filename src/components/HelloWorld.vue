@@ -2,41 +2,55 @@
   <v-container>
     <v-row class="text-center">
       <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
+        <div class="d-flex justify-center mx-4">
+          <v-img
+            :src="require('../assets/SSLogo.png')"
+            class="my-3"
+            contain
+            height="200"
+            width="250"
+          />
+        </div>
       </v-col>
 
       <v-col class="mb-4 primary">
-        <h1 class="display-2 font-weight-bold mb-3">Welcome to Vuetify</h1>
+        <h1 class="display-2 font-weight-bold mb-3">
+          Welcome to menu selection
+        </h1>
 
         <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br />please join our online
-          <a href="https://community.vuetifyjs.com" target="_blank"
-            >Discord Community</a
-          >
+          Please make a meal selection for the year end function, scroll through
+          the images below to choose an option,
+          <br />please make a selection and click next.
         </p>
       </v-col>
 
       <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">What's next?</h2>
+        <h2 class="headline font-weight-bold mb-3">
+          {{ state.colors[state.model].text }}
+        </h2>
 
         <v-row justify="center">
-          <a
-            v-for="(next, i) in state.whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
+          <v-carousel v-model="state.model">
+            <v-carousel-item v-for="(color, i) in state.colors" :key="i">
+              <v-sheet height="100%" tile>
+                <v-row class="fill-height" align="center" justify="center">
+                  <div class="text-h2">
+                    <v-img
+                      :src="require(`../assets/${color.href}`)"
+                      class="my-3"
+                      height="400px"
+                      contain
+                    />
+                  </div>
+                </v-row>
+              </v-sheet>
+            </v-carousel-item>
+          </v-carousel>
         </v-row>
       </v-col>
+
+      <v-btn @click="routeToTest" label="To test">To Test</v-btn>
 
       <v-col class="mb-5" cols="12">
         <h2 class="headline font-weight-bold mb-3">Important Links</h2>
@@ -74,6 +88,7 @@
 </template>
 
 <script setup>
+import router from "@/router";
 import { reactive } from "vue";
 const state = reactive({
   ecosystem: [
@@ -112,19 +127,52 @@ const state = reactive({
       href: "https://medium.com/vuetify",
     },
   ],
-  whatsNext: [
+  model: 0,
+  colors: [
     {
-      text: "Explore components",
-      href: "https://vuetifyjs.com/components/api-explorer",
+      text: "Beef Burger",
+      href: "beef-burger.jpg",
     },
     {
-      text: "Select a layout",
-      href: "https://vuetifyjs.com/getting-started/pre-made-layouts",
+      text: "Chicken Burger",
+      href: "chicken-burger.jpg",
     },
     {
-      text: "Frequently Asked Questions",
-      href: "https://vuetifyjs.com/getting-started/frequently-asked-questions",
+      text: "Vegan Burger",
+      href: "veggie-burger.jpg",
+    },
+    {
+      text: "Chicken Nuggets",
+      href: "chicken-nuggets.jpg",
+    },
+    {
+      text: "Pizza",
+      href: "pizza.jpg",
+    },
+    {
+      text: "Half Chicken",
+      href: "half-chicken-and-chips.jpg",
+    },
+    {
+      text: "Ceasar Salad",
+      href: "caesar-salad.jpg",
+    },
+    {
+      text: "Pancakes",
+      href: "pancakes.jpg",
+    },
+    {
+      text: "Plate of Chips",
+      href: "chips.jpg",
+    },
+    {
+      text: "Curry and Rice",
+      href: "mince-curry.jpg",
     },
   ],
 });
+
+const routeToTest = () => {
+  router.push({ name: "shoppingcart" });
+};
 </script>
