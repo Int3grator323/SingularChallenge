@@ -12,7 +12,7 @@ export default new Vuetify({
     themes: {
       light: {
         base: colors.red,
-        primary: colors.blueGrey,
+        primary: colors.teal,
         secondary: colors.grey,
         anchor: colors.amber,
         accent: colors.teal.accent4,

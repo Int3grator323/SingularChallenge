@@ -13,46 +13,48 @@
         </div>
       </v-col>
 
-      <v-col class="mb-4 primary">
-        <h1 class="display-2 font-weight-bold mb-3">
+      <v-col class="primary">
+        <h1 class="display-2 font-weight-bold mb-3 pt-3">
           Welcome to menu selection
         </h1>
 
         <p class="subheading font-weight-regular">
-          Please make a meal selection for the year end function, scroll through
+          Please make a meal selection for the year end function! Scroll through
           the images below to choose an option,
-          <br />please make a selection and click next.
+          <br />please make a selection and click Choose Option.
         </p>
       </v-col>
 
       <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">
+        <h1 class="display-1 font-weight-bold mb-5">
           {{ state.colors[state.model].text }}
-        </h2>
+        </h1>
 
         <v-row justify="center">
-          <v-carousel v-model="state.model">
-            <v-carousel-item v-for="(color, i) in state.colors" :key="i">
-              <v-sheet height="100%" tile>
-                <v-row class="fill-height" align="center" justify="center">
-                  <div class="text-h2">
-                    <v-img
-                      :src="require(`../assets/${color.href}`)"
-                      class="my-3"
-                      height="400px"
-                      contain
-                    />
-                  </div>
-                </v-row>
-              </v-sheet>
+          <v-carousel v-model="state.model" hide-delimiter-background>
+            <v-carousel-item
+              v-for="(color, i) in state.colors"
+              :key="i"
+              :src="require(`../assets/${color.href}`)"
+              reverse-transition="fade-transition"
+              transition="fade-transition"
+            >
             </v-carousel-item>
           </v-carousel>
         </v-row>
       </v-col>
 
-      <v-btn @click="routeToTest" label="To test">To Test</v-btn>
+      <v-container class="grey lighten-2 mb-6 py-6">
+        <v-row align="center" justify="center">
+          <v-btn @click="routeToTest" label="To test">Choose Option</v-btn>
+        </v-row>
+      </v-container>
 
-      <v-col class="mb-5" cols="12">
+      <!-- <div class="d-flex justify-center mx-4">
+        <v-btn @click="routeToTest" label="To test">To Cart</v-btn>
+      </div> -->
+
+      <!-- <v-col class="mb-5" cols="12">
         <h2 class="headline font-weight-bold mb-3">Important Links</h2>
 
         <v-row justify="center">
@@ -66,9 +68,9 @@
             {{ link.text }}
           </a>
         </v-row>
-      </v-col>
+      </v-col> -->
 
-      <v-col class="mb-5" cols="12">
+      <!-- <v-col class="mb-5" cols="12">
         <h2 class="headline font-weight-bold mb-3">Ecosystem</h2>
 
         <v-row justify="center">
@@ -82,7 +84,7 @@
             {{ eco.text }}
           </a>
         </v-row>
-      </v-col>
+      </v-col> -->
     </v-row>
   </v-container>
 </template>
