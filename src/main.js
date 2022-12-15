@@ -4,6 +4,7 @@ import vuetify from "./plugins/vuetify";
 import VueRouter from "vue-router";
 import router from "./router";
 import pinia from "./vueStore";
+import './plugins/element.js'
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);

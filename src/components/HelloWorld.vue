@@ -1,60 +1,106 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <div class="d-flex justify-center mx-4">
-          <v-img
-            :src="require('../assets/SSLogo.png')"
-            class="my-3"
-            contain
-            height="200"
-            width="250"
-          />
+  <div>
+    <validation-observer ref="observer" v-slot="{ invalid, handleSubmit }">
+      <v-form
+        @submit.stop.prevent="handleSubmit(create)"
+        @keyup.enter="handleSubmit(create)"
+        slot="form"
+      >
+        <div class="px-4">
+          <div
+            class="scrollable"
+            :class="{ mobile: $vuetify.breakpoint.smAndDown }"
+          >
+            <v-row no-gutters>
+              <v-col cols="12" class="pt-1">
+                <validation-provider v-slot="{ errors }" name="name">
+                  <v-text-field
+                    dense
+                    outlined
+                    color="accent"
+                    :error-messages="errors"
+                    label="Name"
+                    v-model="state.employeesData.name"
+                    autofocus
+                  />
+                  <v-text-field
+                    dense
+                    outlined
+                    color="accent"
+                    :error-messages="errors"
+                    label="Surname"
+                    v-model="state.employeesData.surname"
+                    autofocus
+                  />
+                </validation-provider>
+              </v-col>
+            </v-row>
+          </div>
         </div>
-      </v-col>
+        <v-btn type="submit" depressed color="blue" :disabled="invalid">
+          Register
+        </v-btn>
+      </v-form>
+    </validation-observer>
 
-      <v-col class="primary">
-        <h1 class="display-2 font-weight-bold mb-3 pt-3">
-          Welcome to menu selection
-        </h1>
+    <v-btn @click="routeToTest" label="To test">To Test</v-btn>
 
-        <p class="subheading font-weight-regular">
-          Please make a meal selection for the year end function! Scroll through
-          the images below to choose an option,
-          <br />please make a selection and click Choose Option.
-        </p>
-      </v-col>
+    <v-container>
+      <v-row class="text-center">
+        <v-col cols="12">
+          <div class="d-flex justify-center mx-4">
+            <v-img
+              :src="require('../assets/SSLogo.png')"
+              class="my-3"
+              contain
+              height="200"
+              width="250"
+            />
+          </div>
+        </v-col>
 
-      <v-col class="mb-5" cols="12">
-        <h1 class="display-1 font-weight-bold mb-5">
-          {{ state.colors[state.model].text }}
-        </h1>
+        <v-col class="primary">
+          <h1 class="display-2 font-weight-bold mb-3 pt-3">
+            Welcome to menu selection
+          </h1>
 
-        <v-row justify="center">
-          <v-carousel v-model="state.model" hide-delimiter-background>
-            <v-carousel-item
-              v-for="(color, i) in state.colors"
-              :key="i"
-              :src="require(`../assets/${color.href}`)"
-              reverse-transition="fade-transition"
-              transition="fade-transition"
-            >
-            </v-carousel-item>
-          </v-carousel>
-        </v-row>
-      </v-col>
+          <p class="subheading font-weight-regular">
+            Please make a meal selection for the year end function! Scroll
+            through the images below to choose an option,
+            <br />please make a selection and click Choose Option.
+          </p>
+        </v-col>
 
-      <v-container class="grey lighten-2 mb-6 py-6">
-        <v-row align="center" justify="center">
-          <v-btn @click="routeToTest" label="To test">Choose Option</v-btn>
-        </v-row>
-      </v-container>
+        <v-col class="mb-5" cols="12">
+          <h1 class="display-1 font-weight-bold mb-5">
+            {{ state.colors[state.model].text }}
+          </h1>
 
-      <!-- <div class="d-flex justify-center mx-4">
+          <v-row justify="center">
+            <v-carousel v-model="state.model" hide-delimiter-background>
+              <v-carousel-item
+                v-for="(color, i) in state.colors"
+                :key="i"
+                :src="require(`../assets/${color.href}`)"
+                reverse-transition="fade-transition"
+                transition="fade-transition"
+              >
+              </v-carousel-item>
+            </v-carousel>
+          </v-row>
+        </v-col>
+
+        <v-container class="grey lighten-2 mb-6 py-6">
+          <v-row align="center" justify="center">
+            <v-btn @click="routeToTest" label="To test">Choose Option</v-btn>
+          </v-row>
+        </v-container>
+
+        <!-- <div class="d-flex justify-center mx-4">
         <v-btn @click="routeToTest" label="To test">To Cart</v-btn>
       </div> -->
 
-      <!-- <v-col class="mb-5" cols="12">
+        <!-- <v-col class="mb-5" cols="12">
         <h2 class="headline font-weight-bold mb-3">Important Links</h2>
 
         <v-row justify="center">
@@ -70,7 +116,7 @@
         </v-row>
       </v-col> -->
 
-      <!-- <v-col class="mb-5" cols="12">
+        <!-- <v-col class="mb-5" cols="12">
         <h2 class="headline font-weight-bold mb-3">Ecosystem</h2>
 
         <v-row justify="center">
@@ -85,50 +131,27 @@
           </a>
         </v-row>
       </v-col> -->
-    </v-row>
-  </v-container>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script setup>
 import router from "@/router";
 import { reactive } from "vue";
+import * as FirestoreService from "@/firebaseInit";
+import { ValidationObserver, ValidationProvider } from "vee-validate";
+const create = () => {
+  console.log(state);
+  FirestoreService.createEmployee(state.employeesData).then(() => {
+    console.log("success");
+  });
+};
 const state = reactive({
-  ecosystem: [
-    {
-      text: "vuetify-loader",
-      href: "https://github.com/vuetifyjs/vuetify-loader",
-    },
-    {
-      text: "github",
-      href: "https://github.com/vuetifyjs/vuetify",
-    },
-    {
-      text: "awesome-vuetify",
-      href: "https://github.com/vuetifyjs/awesome-vuetify",
-    },
-  ],
-  importantLinks: [
-    {
-      text: "Documentation",
-      href: "https://vuetifyjs.com",
-    },
-    {
-      text: "Chat",
-      href: "https://community.vuetifyjs.com",
-    },
-    {
-      text: "Made with Vuetify",
-      href: "https://madewithvuejs.com/vuetify",
-    },
-    {
-      text: "Twitter",
-      href: "https://twitter.com/vuetifyjs",
-    },
-    {
-      text: "Articles",
-      href: "https://medium.com/vuetify",
-    },
-  ],
+  employeesData: {
+    name: "",
+    surname: "",
+  },
   model: 0,
   colors: [
     {
