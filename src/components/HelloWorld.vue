@@ -66,25 +66,39 @@
                 </v-row>
               </div>
             </div>
-
             <v-container class="grey lighten-2 mb-6 py-6">
-              <v-row align="center" justify="center">
-                <v-btn type="submit" depressed color="blue" :disabled="invalid">
-                  Submit
-                </v-btn>
+              <v-row no-gutters>
+                <v-col md="6">
+                  <v-card class="pa-2" outlined tile align="center">
+                    <v-btn
+                      type="submit"
+                      depressed
+                      color="blue"
+                      :disabled="invalid"
+                      width="150px"
+                    >
+                      Submit
+                    </v-btn>
+                  </v-card>
+                </v-col>
+                <v-col md="6">
+                  <v-card class="pa-2" outlined tile align="center">
+                    <v-btn
+                      @click="routeToItems"
+                      label="To test"
+                      depressed
+                      color="blue"
+                      class="pa-4"
+                      width="150px"
+                      >Next</v-btn
+                    >
+                  </v-card>
+                </v-col>
               </v-row>
             </v-container>
           </v-form>
         </validation-observer>
       </v-col>
-      <v-btn
-        @click="routeToItems"
-        label="To test"
-        depressed
-        color="blue"
-        class="pa-4"
-        >Next</v-btn
-      >
     </v-container>
   </div>
 </template>
