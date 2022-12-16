@@ -1,50 +1,6 @@
 <template>
   <div>
-    <validation-observer ref="observer" v-slot="{ invalid, handleSubmit }">
-      <v-form
-        @submit.stop.prevent="handleSubmit(create)"
-        @keyup.enter="handleSubmit(create)"
-        slot="form"
-      >
-        <div class="px-4">
-          <div
-            class="scrollable"
-            :class="{ mobile: $vuetify.breakpoint.smAndDown }"
-          >
-            <v-row no-gutters>
-              <v-col cols="12" class="pt-1">
-                <validation-provider v-slot="{ errors }" name="name">
-                  <v-text-field
-                    dense
-                    outlined
-                    color="accent"
-                    :error-messages="errors"
-                    label="Name"
-                    v-model="state.employeesData.name"
-                    autofocus
-                  />
-                  <v-text-field
-                    dense
-                    outlined
-                    color="accent"
-                    :error-messages="errors"
-                    label="Surname"
-                    v-model="state.employeesData.surname"
-                    autofocus
-                  />
-                </validation-provider>
-              </v-col>
-            </v-row>
-          </div>
-        </div>
-        <v-btn type="submit" depressed color="blue" :disabled="invalid">
-          Register
-        </v-btn>
-      </v-form>
-    </validation-observer>
-
-    <v-btn @click="routeToTest" label="To test">To Test</v-btn>
-
+    <!-- Singular Systems Logo -->
     <v-container>
       <v-row class="text-center">
         <v-col cols="12">
@@ -59,79 +15,76 @@
           </div>
         </v-col>
 
+        <!-- Welcome banner -->
         <v-col class="primary">
-          <h1 class="display-2 font-weight-bold mb-3 pt-3">
-            Welcome to menu selection
-          </h1>
+          <h1 class="display-2 font-weight-bold mb-3 pt-3">Registration</h1>
 
           <p class="subheading font-weight-regular">
-            Please make a meal selection for the year end function! Scroll
-            through the images below to choose an option,
-            <br />please make a selection and click Choose Option.
+            Please enter your details and click submit to register!
+            <br />Once registered press next to continue!
           </p>
         </v-col>
-
-        <v-col class="mb-5" cols="12">
-          <h1 class="display-1 font-weight-bold mb-5">
-            {{ state.colors[state.model].text }}
-          </h1>
-
-          <v-row justify="center">
-            <v-carousel v-model="state.model" hide-delimiter-background>
-              <v-carousel-item
-                v-for="(color, i) in state.colors"
-                :key="i"
-                :src="require(`../assets/${color.href}`)"
-                reverse-transition="fade-transition"
-                transition="fade-transition"
-              >
-              </v-carousel-item>
-            </v-carousel>
-          </v-row>
-        </v-col>
-
-        <v-container class="grey lighten-2 mb-6 py-6">
-          <v-row align="center" justify="center">
-            <v-btn @click="routeToTest" label="To test">Choose Option</v-btn>
-          </v-row>
-        </v-container>
-
-        <!-- <div class="d-flex justify-center mx-4">
-        <v-btn @click="routeToTest" label="To test">To Cart</v-btn>
-      </div> -->
-
-        <!-- <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">Important Links</h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in state.importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col> -->
-
-        <!-- <v-col class="mb-5" cols="12">
-        <h2 class="headline font-weight-bold mb-3">Ecosystem</h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in state.ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
-      </v-col> -->
       </v-row>
+
+      <!-- Form -->
+      <v-col>
+        <h2 align="center" justify="center">Enter details:</h2>
+        <validation-observer ref="observer" v-slot="{ invalid, handleSubmit }">
+          <v-form
+            @submit.stop.prevent="handleSubmit(create)"
+            @keyup.enter="handleSubmit(create)"
+            slot="form"
+          >
+            <div class="px-4">
+              <div
+                class="scrollable"
+                :class="{ mobile: $vuetify.breakpoint.smAndDown }"
+              >
+                <v-row no-gutters>
+                  <v-col cols="12" class="pt-1">
+                    <validation-provider v-slot="{ errors }" name="name">
+                      <v-text-field
+                        dense
+                        outlined
+                        color="accent"
+                        :error-messages="errors"
+                        label="Name"
+                        v-model="state.employeesData.name"
+                        autofocus
+                      />
+                      <v-text-field
+                        dense
+                        outlined
+                        color="accent"
+                        :error-messages="errors"
+                        label="Surname"
+                        v-model="state.employeesData.surname"
+                        autofocus
+                      />
+                    </validation-provider>
+                  </v-col>
+                </v-row>
+              </div>
+            </div>
+
+            <v-container class="grey lighten-2 mb-6 py-6">
+              <v-row align="center" justify="center">
+                <v-btn type="submit" depressed color="blue" :disabled="invalid">
+                  Submit
+                </v-btn>
+              </v-row>
+            </v-container>
+          </v-form>
+        </validation-observer>
+      </v-col>
+      <v-btn
+        @click="routeToItems"
+        label="To test"
+        depressed
+        color="blue"
+        class="pa-4"
+        >Next</v-btn
+      >
     </v-container>
   </div>
 </template>
@@ -152,52 +105,9 @@ const state = reactive({
     name: "",
     surname: "",
   },
-  model: 0,
-  colors: [
-    {
-      text: "Beef Burger",
-      href: "beef-burger.jpg",
-    },
-    {
-      text: "Chicken Burger",
-      href: "chicken-burger.jpg",
-    },
-    {
-      text: "Vegan Burger",
-      href: "veggie-burger.jpg",
-    },
-    {
-      text: "Chicken Nuggets",
-      href: "chicken-nuggets.jpg",
-    },
-    {
-      text: "Pizza",
-      href: "pizza.jpg",
-    },
-    {
-      text: "Half Chicken",
-      href: "half-chicken-and-chips.jpg",
-    },
-    {
-      text: "Ceasar Salad",
-      href: "caesar-salad.jpg",
-    },
-    {
-      text: "Pancakes",
-      href: "pancakes.jpg",
-    },
-    {
-      text: "Plate of Chips",
-      href: "chips.jpg",
-    },
-    {
-      text: "Curry and Rice",
-      href: "mince-curry.jpg",
-    },
-  ],
 });
 
-const routeToTest = () => {
-  router.push({ name: "shoppingcart" });
+const routeToItems = () => {
+  router.push({ name: "itemselection" });
 };
 </script>

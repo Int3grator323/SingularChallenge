@@ -10,6 +10,11 @@ const router = new VueRouter({
       component: () => import("@/components/HelloWorld.vue"),
     },
     {
+      path: "/item",
+      name: "itemselection",
+      component: () => import("@/components/ItemSelection.vue"),
+    },
+    {
       path: "/cart",
       name: "shoppingcart",
       component: () => import("@/components/ShoppingCart.vue"),
