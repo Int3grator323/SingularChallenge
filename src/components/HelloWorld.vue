@@ -28,7 +28,7 @@
 
       <!-- Form -->
       <v-col>
-        <h2 align="center" justify="center">Enter details:</h2>
+        <h2 align="center" justify="center">Add User:</h2>
         <validation-observer ref="observer" v-slot="{ invalid, handleSubmit }">
           <v-form
             @submit.stop.prevent="handleSubmit(create)"
@@ -57,9 +57,16 @@
                         outlined
                         color="accent"
                         :error-messages="errors"
-                        label="Surname"
-                        v-model="state.employeesData.surname"
-                        autofocus
+                        label="Email"
+                        v-model="state.employeesData.email"
+                      />
+                      <v-text-field
+                        dense
+                        outlined
+                        color="accent"
+                        :error-messages="errors"
+                        label="Phone"
+                        v-model="state.employeesData.phone"
                       />
                     </validation-provider>
                   </v-col>
@@ -112,12 +119,14 @@ const create = () => {
   console.log(state);
   FirestoreService.createEmployee(state.employeesData).then(() => {
     console.log("success");
+    alert("Success!");
   });
 };
 const state = reactive({
   employeesData: {
     name: "",
-    surname: "",
+    email: "",
+    phone: "",
   },
 });
 
