@@ -112,16 +112,24 @@
 
 <script setup>
 import router from "@/router";
-import { reactive } from "vue";
-import * as FirestoreService from "@/firebaseInit";
+import { onMounted, reactive } from "vue";
+import { employeeStore } from "@/vueStore/employees";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
-const create = () => {
-  console.log(state);
-  FirestoreService.createEmployee(state.employeesData).then(() => {
-    console.log("success");
-    alert("Success!");
-  });
-};
+const useemployeeStore = employeeStore();
+const { getAllEmployees } = useemployeeStore;
+onMounted(() => {
+  getAllEmployees();
+});
+
+// const getUserdetails = () => {
+//   let temp = [];
+//   FirestoreService.getEmployeeDetails().then(function (employeeData) {
+//     employeeData.forEach(function (employeeDetails) {
+//       temp.push(employeeDetails.data());
+//     });
+//     console.log("Success!\n", temp.sort());
+//   });
+// };
 const state = reactive({
   employeesData: {
     name: "",

@@ -19,6 +19,11 @@ const router = new VueRouter({
       name: "shoppingcart",
       component: () => import("@/components/ShoppingCart.vue"),
     },
+    {
+      path: "/db",
+      name: "nametable",
+      component: () => import("@/components/NameTable.vue"),
+    },
   ],
 });
 

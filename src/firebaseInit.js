@@ -26,3 +26,34 @@ export const createEmployee = (value) => {
       console.error("Error writing document: ", error);
     });
 };
+export const getEmployeeDetails = () => {
+  return db.collection("employees").get();
+};
+export const removeEmployeeDetails = (value) => {
+  return db
+    .collection("employees")
+    .doc(value)
+    .delete()
+    .then(() => {
+      console.log("Deleted!");
+    })
+    .catch((error) => {
+      console.error("No such entry", error);
+    });
+};
+export const updateEmployeeDetails = (data) => {
+  return db
+    .collection("employees")
+    .doc(data.email)
+    .set({
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+    })
+    .then(() => {
+      console.log("Document successfully written!");
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    });
+};

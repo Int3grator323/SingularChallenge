@@ -31,15 +31,15 @@
         <!-- Carousel -->
         <v-col class="mb-5" cols="12">
           <h1 class="display-1 font-weight-bold mb-5">
-            {{ state.colors[state.model].text }}
+            {{ state.options[state.model].text }}
           </h1>
 
           <v-row justify="center">
             <v-carousel v-model="state.model" hide-delimiter-background>
               <v-carousel-item
-                v-for="(color, i) in state.colors"
+                v-for="(option, i) in state.options"
                 :key="i"
-                :src="require(`../assets/${color.href}`)"
+                :src="require(`../assets/${option.href}`)"
                 reverse-transition="fade-transition"
                 transition="fade-transition"
               >
@@ -88,7 +88,7 @@ import router from "@/router";
 import { reactive } from "vue";
 const state = reactive({
   model: 0,
-  colors: [
+  options: [
     {
       text: "Beef Burger",
       href: "beef-burger.jpg",
