@@ -5,14 +5,20 @@ export const employeeStore = defineStore("employees", {
     employeeList: [],
   }),
   actions: {
-    async getAllEmployees() {
-      getEmployeeDetails().then(function (employeeData) {
-        this.upsert(employeeData);
-      });
-    },
-    upsert(data) {
-      data.forEach(function (employeeDetails) {
-        this.employeeList.push(employeeDetails.data());
+    getAllEmployees() {
+      getEmployeeDetails().then((employeeData) => {
+        employeeData.docs.forEach((value) => {
+          if (this.employeeList.length > 0) {
+            const index = this.employeeList.findIndex(
+              (data) => data.email === value.data()?.email
+            );
+            if (index > -1) {
+              this.employeeList[index] = value.data();
+              return;
+            }
+          }
+          this.employeeList.push(value.data());
+        });
       });
     },
   },

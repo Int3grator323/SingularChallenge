@@ -33,10 +33,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="item in getUserdetails" :key="item.name">
+                <tr v-for="item in employeeList" :key="item.name">
                   <td>{{ item.name }}</td>
                   <td>{{ item.email }}</td>
-                  <td>{{ item.number }}</td>
+                  <td>{{ item.phone }}</td>
                   <td>{{ item.choice }}</td>
                 </tr>
               </tbody>
@@ -50,14 +50,23 @@
 
 <script setup>
 // import router from "@/router";
-import * as FirestoreService from "@/firebaseInit";
-const getUserdetails = () => {
-  let temp = [];
-  FirestoreService.getEmployeeDetails().then(function (employeeData) {
-    employeeData.forEach(function (employeeDetails) {
-      temp.push(employeeDetails.data());
-    });
-    console.log("Success!\n", temp.sort());
-  });
-};
+// import * as FirestoreService from "@/firebaseInit";
+// const getUserdetails = () => {
+//   let temp = [];
+//   FirestoreService.getEmployeeDetails().then(function (employeeData) {
+//     employeeData.forEach(function (employeeDetails) {
+//       temp.push(employeeDetails.data());
+//     });
+//     console.log("Success!\n", temp.sort());
+//   });
+// };
+
+import { employeeStore } from "@/vueStore/employees";
+import { storeToRefs } from "pinia";
+import { onMounted } from "vue";
+const { getAllEmployees } = employeeStore();
+const { employeeList } = storeToRefs(employeeStore());
+onMounted(() => {
+  getAllEmployees();
+});
 </script>
