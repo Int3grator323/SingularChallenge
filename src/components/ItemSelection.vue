@@ -86,6 +86,7 @@
 <script setup>
 import router from "@/router";
 import { reactive } from "vue";
+import { useItemSelection } from "@/vueStore/itemSelection";
 const state = reactive({
   model: 0,
   options: [
@@ -131,7 +132,14 @@ const state = reactive({
     },
   ],
 });
+
+const { getUserChoice } = useItemSelection();
+const setChoice = () => {
+  getUserChoice(state.options[state.model].text);
+};
+
 const routeToCart = () => {
+  setChoice();
   router.push({ name: "shoppingcart" });
 };
 </script>

@@ -46,8 +46,8 @@
         <v-col md="6">
           <v-card class="pa-2" outlined tile align="center">
             <v-btn
-              @click="routeToCart"
-              label="To test"
+              @click="setUser"
+              label="Yes"
               depressed
               width="150px"
               color="blue"
@@ -63,4 +63,22 @@
 
 <script setup>
 import router from "@/router";
+import { employeeStore } from "@/vueStore/employees";
+import { storeToRefs } from "pinia";
+import { useUserReg } from "@/vueStore/userReg";
+import { useItemSelection } from "@/vueStore/itemSelection";
+import { onMounted } from "vue";
+const { getAllEmployees } = employeeStore();
+const { email } = storeToRefs(useUserReg);
+const { text } = storeToRefs(useItemSelection);
+// const { employeeList } = storeToRefs(employeeStore());
+onMounted(() => {
+  console.log(email.value);
+});
+onMounted(() => {
+  console.log(text.value);
+});
+onMounted(() => {
+  getAllEmployees();
+});
 </script>

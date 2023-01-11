@@ -42,18 +42,9 @@ export const removeEmployeeDetails = (value) => {
     });
 };
 export const updateEmployeeDetails = (data) => {
-  return db
-    .collection("employees")
-    .doc(data.email)
-    .set({
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-    })
-    .then(() => {
-      console.log("Document successfully written!");
-    })
-    .catch((error) => {
-      console.error("Error writing document: ", error);
-    });
+  return db.collection("employees").doc(data.email).set({
+    name: data.name,
+    email: data.email,
+    phone: data.phone,
+  });
 };

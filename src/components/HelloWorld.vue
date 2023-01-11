@@ -114,6 +114,7 @@
 import router from "@/router";
 import { reactive } from "vue";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
+import { useUserReg } from "@/vueStore/userReg";
 
 const state = reactive({
   employeesData: {
@@ -123,7 +124,13 @@ const state = reactive({
   },
 });
 
+const { getUserEmail } = useUserReg();
+const setUser = () => {
+  getUserEmail(state.employeesData.email);
+};
+
 const routeToItems = () => {
+  setUser();
   router.push({ name: "itemselection" });
 };
 </script>
