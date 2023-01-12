@@ -18,7 +18,7 @@
             Your Chosen Item is:
           </h1>
 
-          <h2 class="Selection"></h2>
+          <h2 class="Selection">{{ choice }}</h2>
 
           <p class="subheading font-weight-regular">
             If you are happy with your choice, press Yes to submit, or No to
@@ -46,7 +46,7 @@
         <v-col md="6">
           <v-card class="pa-2" outlined tile align="center">
             <v-btn
-              @click="setUser"
+              @click="confirm"
               label="Yes"
               depressed
               width="150px"
@@ -63,22 +63,16 @@
 
 <script setup>
 import router from "@/router";
-import { employeeStore } from "@/vueStore/employees";
+// import { employeeStore } from "@/vueStore/employees";
 import { storeToRefs } from "pinia";
 import { useUserReg } from "@/vueStore/userReg";
 import { useItemSelection } from "@/vueStore/itemSelection";
-import { onMounted } from "vue";
-const { getAllEmployees } = employeeStore();
-const { email } = storeToRefs(useUserReg);
-const { text } = storeToRefs(useItemSelection);
+const { email } = storeToRefs(useUserReg());
+const { choice } = storeToRefs(useItemSelection());
+const { updateUserChoice } = useItemSelection();
 // const { employeeList } = storeToRefs(employeeStore());
-onMounted(() => {
-  console.log(email.value);
-});
-onMounted(() => {
-  console.log(text.value);
-});
-onMounted(() => {
-  getAllEmployees();
-});
+const confirm = () => {
+  updateUserChoice({ email: email.value, choice: choice.value });
+  router.push({ name: "home" });
+};
 </script>

@@ -18,7 +18,8 @@ export const db = firebase.firestore();
 export const createEmployee = (value) => {
   return db
     .collection("employees")
-    .add(value)
+    .doc(value.email.toUpperCase().trim())
+    .set(value)
     .then(() => {
       console.log("Document successfully written!");
     })
@@ -32,7 +33,7 @@ export const getEmployeeDetails = () => {
 export const removeEmployeeDetails = (value) => {
   return db
     .collection("employees")
-    .doc(value)
+    .doc(value.toUpperCase().trim())
     .delete()
     .then(() => {
       console.log("Deleted!");
@@ -42,9 +43,15 @@ export const removeEmployeeDetails = (value) => {
     });
 };
 export const updateEmployeeDetails = (data) => {
-  return db.collection("employees").doc(data.email).set({
-    name: data.name,
-    email: data.email,
-    phone: data.phone,
-  });
+  return db
+    .collection("employees")
+    .doc(data.email.toUpperCase().trim())
+    .set(data);
+};
+
+export const updateChoice = ({ email, choice }) => {
+  return db
+    .collection("employees")
+    .doc(email.toUpperCase().trim())
+    .update({ choice: choice });
 };

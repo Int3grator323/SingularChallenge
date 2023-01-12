@@ -78,10 +78,11 @@
                             ></v-text-field>
                           </v-col>
                           <v-col cols="12" sm="6" md="4">
-                            <v-text-field
+                            <v-autocomplete
+                              :items="state.foodItems"
                               v-model="state.editedItem.choice"
                               label="Choice"
-                            ></v-text-field>
+                            ></v-autocomplete>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -143,10 +144,21 @@ const { getAllEmployees, editEmployeesDetails, deleteEmployeesDetails } =
 const { employeeList } = storeToRefs(employeeStore());
 onMounted(() => {
   getAllEmployees();
-  console.log(state);
 });
 // ============================
 const state = reactive({
+  foodItems: [
+    "Beef Burger",
+    "Chicken Burger",
+    "Vegan Burger",
+    "Chicken Nuggets",
+    "Pizza",
+    "Half Chicken",
+    "Ceasar Salad",
+    "Pancakes",
+    "Plate of Chips",
+    "Curry and Rice",
+  ],
   dialog: false,
   dialogDelete: false,
   headers: [
@@ -196,7 +208,6 @@ const deleteItem = (item) => {
 
 const deleteItemConfirm = () => {
   employeeList.value?.splice(state.editedIndex, 1);
-  console.log(state.editedItem);
   deleteEmployeesDetails(state.editedItem.email);
   closeDelete();
 };

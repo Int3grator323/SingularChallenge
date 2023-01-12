@@ -113,6 +113,7 @@
 <script setup>
 import router from "@/router";
 import { reactive } from "vue";
+import { createEmployee } from "@/firebaseInit";
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import { useUserReg } from "@/vueStore/userReg";
 
@@ -127,6 +128,10 @@ const state = reactive({
 const { getUserEmail } = useUserReg();
 const setUser = () => {
   getUserEmail(state.employeesData.email);
+};
+
+const create = () => {
+  createEmployee(state.employeesData);
 };
 
 const routeToItems = () => {

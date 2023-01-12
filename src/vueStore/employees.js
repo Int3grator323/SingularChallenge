@@ -42,16 +42,9 @@ export const employeeStore = defineStore("employees", {
         });
     },
     deleteEmployeesDetails(item) {
-      console.log(item);
       removeEmployeeDetails(item)
         .then(() => {
           console.log("Document successfully deleted!");
-          const index = this.employeeList.findIndex(
-            (data) => data.email === item.email
-          );
-          if (index > -1) {
-            this.employeeList[index] = item;
-          }
         })
         .catch((error) => {
           console.error("Error deleting document: ", error);
