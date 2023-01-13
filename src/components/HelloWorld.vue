@@ -75,11 +75,13 @@
             </div>
             <v-container class="grey lighten-2 mb-6 py-6">
               <v-row no-gutters>
-                <v-col md="6">
+                <v-col>
                   <v-card class="pa-2" outlined tile align="center">
                     <v-btn
                       type="submit"
                       depressed
+                      @click="routeToItems"
+                      label="To test"
                       color="blue"
                       :disabled="invalid"
                       width="150px"
@@ -88,7 +90,7 @@
                     </v-btn>
                   </v-card>
                 </v-col>
-                <v-col md="6">
+                <!-- <v-col md="6">
                   <v-card class="pa-2" outlined tile align="center">
                     <v-btn
                       @click="routeToItems"
@@ -100,7 +102,7 @@
                       >Next</v-btn
                     >
                   </v-card>
-                </v-col>
+                </v-col> -->
               </v-row>
             </v-container>
           </v-form>

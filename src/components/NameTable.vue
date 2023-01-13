@@ -22,27 +22,6 @@
     <v-container>
       <v-row>
         <v-col>
-          <!-- <v-simple-table>
-            <template v-slot:default>
-              <thead>
-                <tr>
-                  <th class="text-left">Name</th>
-                  <th class="text-left">Email</th>
-                  <th class="text-left">Phone Number</th>
-                  <th class="text-left">Choice</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="item in employeeList" :key="item.name">
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.email }}</td>
-                  <td>{{ item.phone }}</td>
-                  <td>{{ item.choice }}</td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table> -->
-          <!-- <v-spacer></v-spacer> -->
           <!-- ======================================================  -->
           <v-data-table :headers="state.headers" :items="employeeList">
             <template v-slot:top>

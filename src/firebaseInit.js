@@ -22,6 +22,7 @@ export const createEmployee = (value) => {
     .set(value)
     .then(() => {
       console.log("Document successfully written!");
+      alert("Document successfully written!");
     })
     .catch((error) => {
       console.error("Error writing document: ", error);
@@ -53,5 +54,8 @@ export const updateChoice = ({ email, choice }) => {
   return db
     .collection("employees")
     .doc(email.toUpperCase().trim())
-    .update({ choice: choice });
+    .update({ choice: choice })
+    .then(() => {
+      alert("Success!");
+    });
 };
