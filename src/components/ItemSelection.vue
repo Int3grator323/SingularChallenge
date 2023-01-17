@@ -22,9 +22,9 @@
           </h1>
 
           <p class="subheading font-weight-regular">
-            Please make a meal selection for the year end function! Scroll
-            through the images below to choose an option,
-            <br />please make a selection and click Choose Option.
+            Please make a meal selection for the year end function! <br />Scroll
+            through the images below to choose an option, please make a
+            selection and click Choose Option.
           </p>
         </v-col>
 

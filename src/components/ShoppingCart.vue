@@ -72,5 +72,6 @@ const { updateUserChoice } = useItemSelection();
 const confirm = () => {
   updateUserChoice({ email: email.value, choice: choice.value });
   router.push({ name: "home" });
+  window.location.reload();
 };
 </script>
