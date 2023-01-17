@@ -133,11 +133,13 @@ const state = reactive({
   ],
 });
 
+// Sets the itemSelection store's choice equal to the caroucels choice chosen to keep track what choice was made
 const { getUserChoice } = useItemSelection();
 const setChoice = () => {
   getUserChoice(state.options[state.model].text);
 };
 
+//Routing to cart page and calling setChoice
 const routeToCart = () => {
   setChoice();
   router.push({ name: "shoppingcart" });

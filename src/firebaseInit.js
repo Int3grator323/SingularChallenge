@@ -15,6 +15,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const db = firebase.firestore();
+
+//create employee
 export const createEmployee = (value) => {
   return db
     .collection("employees")
@@ -28,9 +30,11 @@ export const createEmployee = (value) => {
       console.error("Error writing document: ", error);
     });
 };
+//get all employees
 export const getEmployeeDetails = () => {
   return db.collection("employees").get();
 };
+//deleting an employee
 export const removeEmployeeDetails = (value) => {
   return db
     .collection("employees")
@@ -43,6 +47,7 @@ export const removeEmployeeDetails = (value) => {
       console.error("No such entry", error);
     });
 };
+//update the employee details
 export const updateEmployeeDetails = (data) => {
   return db
     .collection("employees")
@@ -50,6 +55,7 @@ export const updateEmployeeDetails = (data) => {
     .set(data);
 };
 
+// updating choice made to database
 export const updateChoice = ({ email, choice }) => {
   return db
     .collection("employees")

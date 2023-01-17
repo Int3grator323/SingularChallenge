@@ -63,14 +63,12 @@
 
 <script setup>
 import router from "@/router";
-// import { employeeStore } from "@/vueStore/employees";
 import { storeToRefs } from "pinia";
 import { useUserReg } from "@/vueStore/userReg";
 import { useItemSelection } from "@/vueStore/itemSelection";
 const { email } = storeToRefs(useUserReg());
 const { choice } = storeToRefs(useItemSelection());
 const { updateUserChoice } = useItemSelection();
-// const { employeeList } = storeToRefs(employeeStore());
 const confirm = () => {
   updateUserChoice({ email: email.value, choice: choice.value });
   router.push({ name: "home" });

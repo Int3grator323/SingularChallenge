@@ -90,19 +90,6 @@
                     </v-btn>
                   </v-card>
                 </v-col>
-                <!-- <v-col md="6">
-                  <v-card class="pa-2" outlined tile align="center">
-                    <v-btn
-                      @click="routeToItems"
-                      label="To test"
-                      depressed
-                      color="blue"
-                      class="pa-4"
-                      width="150px"
-                      >Next</v-btn
-                    >
-                  </v-card>
-                </v-col> -->
               </v-row>
             </v-container>
           </v-form>
@@ -127,15 +114,18 @@ const state = reactive({
   },
 });
 
+// Sets the useReg store's email equal to the forms entered email to keep track who we are working with
 const { getUserEmail } = useUserReg();
 const setUser = () => {
   getUserEmail(state.employeesData.email);
 };
 
+// Creates a new employee in the employees store to write to the Firestore database.
 const create = () => {
   createEmployee(state.employeesData);
 };
 
+//Routing to next page and calling setUser to set the User email.
 const routeToItems = () => {
   setUser();
   router.push({ name: "itemselection" });
